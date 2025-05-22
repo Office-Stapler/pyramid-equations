@@ -10,14 +10,16 @@
   clip-path: polygon(50% -50%, 100% 50%, 50% 150%, 0 50%);
   aspect-ratio: 1/cos(50deg);
   background: #7bc3f3;
-  transition: opacity 0.3s ease-in-out;
-}
-
-.tile:hover {
-  opacity: 0.6;
-  cursor: pointer;
+  transition: background-color 0.3s linear;
 }
 
 .selected {
-  background: #3B8686;
+  background: #3b866e;
+}
+
+@media (hover :hover) {
+  .tile:hover {
+    background: #3b866e;
+    cursor: pointer;
+  }
 }
