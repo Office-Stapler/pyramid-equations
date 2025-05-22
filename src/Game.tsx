@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Pyramid } from "./Pyramid/Pyramid"
 import { Stopwatch } from "./Stopwatch/Stopwatch"
-import { useStopWatchContext } from "./contexts/StopwatchContext";
 
 import styles from "./Game.module.css"
 import { BoardEntity } from "./Pyramid/BoardEntity";
