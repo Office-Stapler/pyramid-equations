@@ -19,8 +19,8 @@ export const Tile: React.FC<TileProps> = ({ onClick, tileEntity, isSelected }) =
     )}
       onClick={onClick}
     >
-      <div className={styles.tileOperation}>{tileEntity?.tileOperationDisplay}</div>
-      <div className={styles.tileValue}>{tileEntity?.value}</div>
+      <div>{tileEntity?.tileOperationDisplay}</div>
+      <div>{tileEntity?.value}</div>
     </div>
   );
 }
