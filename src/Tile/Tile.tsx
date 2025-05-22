@@ -10,8 +10,6 @@ type TileProps = {
 };
 
 export const Tile: React.FC<TileProps> = ({ onClick, tileEntity, isSelected }) => {
-
-
   return (
     <div className={classNames(
       styles.tile,
