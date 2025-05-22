@@ -74,13 +74,16 @@ export const Game = () => {
       <div className={styles.historyCnotainer}>
         <div className={styles.historyTitle}>History</div>
         <div className={styles.history}>
-          {board?.history.map((tiles, index) => (
-            <div key={index} className={styles.historyRow}>
-              {tiles.map((tile, tileIndex) => (
-                <span key={tileIndex} className={styles.historyTile}>{tile.value}</span>
-              ))}
-            </div>
-          ))}
+          {
+            board.history.map((tiles) => {
+              const tilesString = tiles.map(tile => `(${tile.tileOperationDisplay}, ${tile.value})`).join(" ");
+              return (
+                <div key={tilesString} className={styles.historyRow}>
+                  {tilesString}
+                </div>
+              )
+            })
+          }
         </div>
       </div>
     </>
