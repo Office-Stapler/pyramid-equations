@@ -70,7 +70,7 @@ export class TileEntity {
   }
 
   toString(): string {
-    return `(${this.tileOperationDisplay}, ${this._value})`;
+    return `(${this.tileOperationDisplay}${this._value})`;
   }
 
   /**

@@ -28,6 +28,21 @@
   flex-direction: column;
   text-align: left;
   padding: 10px;
+  gap: 10px;
   border: 2px solide white;
   min-height: fit-content;
+}
+
+.history {
+  width: 100%;
+  min-height: 32px;
+  border: 1px solid white;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.historyRow {
+  text-align: center;
+  font-size: 15pt;
+  border: 1px solid white;
 }

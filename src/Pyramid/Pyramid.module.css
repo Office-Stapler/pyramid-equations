@@ -5,6 +5,11 @@
   flex-direction: column;
 }
 
+.title {
+  padding: 10px;
+  font-size: 25pt;
+}
+
 .pyramid {
   display: flex;
   flex-direction: column;

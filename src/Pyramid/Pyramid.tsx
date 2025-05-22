@@ -25,7 +25,7 @@ export const Pyramid: React.FC<PyramidProps> = ({
   possibleMoves,
 }) => {
   return <div className={styles.pyramidContainer}>
-    <h1>Pyramid Equations</h1>
+    <div className={styles.title}>Pyramid Equations</div>
     <div className={styles.guesses}>Correct Guesses: {board?.history.length ?? 0}</div>
     <div className={styles.pyramid}>
       <Board

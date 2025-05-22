@@ -76,7 +76,7 @@ export const Game = () => {
         <div className={styles.history}>
           {
             board.history.map((tiles) => {
-              const tilesString = tiles.map(tile => `(${tile.tileOperationDisplay}, ${tile.value})`).join(" ");
+              const tilesString = tiles.map(tile => tile.toString()).join(" ");
               return (
                 <div key={tilesString} className={styles.historyRow}>
                   {tilesString}
