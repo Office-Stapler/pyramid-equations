@@ -73,13 +73,14 @@ export class BoardEntity {
       }
 
       const secondTile = tiles[0];
+      const thirdTile = tiles[1];
       const secondTileHistory = historyTiles[0];
       const thirdTileHistory = historyTiles[1];
 
-      return (
-        secondTile.equals(secondTileHistory) ||
-        secondTile.equals(thirdTileHistory)
-      )
+      const possibility1 = secondTile.equals(secondTileHistory) && thirdTile.equals(thirdTileHistory);
+      const possibility2 = secondTile.equals(thirdTileHistory) && thirdTile.equals(secondTileHistory);
+
+      return possibility1 || possibility2;
     })
   }
 
@@ -93,10 +94,16 @@ export class BoardEntity {
     let i = 0, j = 0, k = 0;
     // Brute force all possible combinations of tiles
     for (i = 0; i < tiles.length; i++) {
-      for (j = i + 1; j < tiles.length; j++) {
+      const tile1 = tiles[i];
+      for (j = 0; j < tiles.length; j++) {
+        if (j === i) {
+          continue;
+        }
+        const tile2 = tiles[j];
         for (k = j + 1; k < tiles.length; k++) {
-          const tile1 = tiles[i];
-          const tile2 = tiles[j];
+          if (k === i) {
+            continue;
+          }
           const tile3 = tiles[k];
           const result1 = tile1.applyTile(tile2).applyTile(tile3);
           const result2 = tile1.applyTile(tile3).applyTile(tile2);

@@ -69,9 +69,14 @@ export class TileEntity {
     }
   }
 
+  toString(): string {
+    return `(${this.tileOperationDisplay}, ${this._value})`;
+  }
+
   /**
    * Apply a different tile to this current tile and return a new tile
-   * with the result of the operation and the tile operation of the second tile
+   * with the result of the operation and the tile operation of the second tile.
+   * The original tile remains unchanged.
    * @param tile The tile to apply
    * @returns A new tile with the result of the operation
    * and the tile operation of the second tile
