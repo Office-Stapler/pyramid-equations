@@ -2,6 +2,10 @@
   text-align: center;
 }
 
+.roundsText {
+  text-align: center;
+}
+
 .infoContainer {
   display: flex;
   flex-direction: column;

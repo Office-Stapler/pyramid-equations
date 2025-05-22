@@ -11,10 +11,23 @@
   aspect-ratio: 1/cos(50deg);
   background: #7bc3f3;
   transition: background-color 0.3s linear;
+  transition: transform 0.5s ease-in-out;
 }
 
 .selected {
   background: #3b866e;
+}
+
+.invalidMoveFound {
+  background-color: #400d0a;
+  transform: scale(0.8);
+  transition: transform 0.5s ease-in-out;
+}
+
+.validMoveFound {
+  background-color: #0a402f;
+  transform: scale(1.2);
+  transition: transform 0.5s ease-in-out;
 }
 
 @media (hover :hover) {

@@ -60,8 +60,8 @@ export const Game = () => {
           possibleMoves={possibleMoves}
         />
       }
+      <div className={styles.roundsText}>Round #{rounds}</div>
       <div className={styles.infoContainer}>
-        <div>Round #{rounds}</div>
         {
           possibleMoves > 0 && (
             <div className={styles.info}>Possible Moves: {possibleMoves}</div>
