@@ -15,10 +15,9 @@ export const Game = () => {
   const [rounds, setRounds] = useState(1);
 
   useEffect(() => {
-    if (!board) {
+    if (board === undefined) {
       return;
     }
-
     const possibleMoves = board.numPossibleMoves;
     if (possibleMoves < 2) {
       setBoard(new BoardEntity(targetNumber));
@@ -34,6 +33,10 @@ export const Game = () => {
     setTargetNumber(nextTargetNumber);
   }, [rounds]);
 
+  if (board === undefined) {
+    return null;
+  }
+
   const increasePoints = () => {
     setPoints((prevPoints) => prevPoints + 1);
   }
@@ -48,16 +51,14 @@ export const Game = () => {
   return (
     <>
       {
-        board && (
-          <Pyramid
-            increasePoints={increasePoints}
-            decreasePoints={decreasePoints}
-            targetNumber={targetNumber}
-            nextRound={nextRound}
-            board={board}
-            possibleMoves={possibleMoves}
-          />
-        )
+        <Pyramid
+          increasePoints={increasePoints}
+          decreasePoints={decreasePoints}
+          targetNumber={targetNumber}
+          nextRound={nextRound}
+          board={board}
+          possibleMoves={possibleMoves}
+        />
       }
       <div className={styles.infoContainer}>
         <div>Round #{rounds}</div>
@@ -68,8 +69,20 @@ export const Game = () => {
         }
         <div className={styles.info}>Target Number: {targetNumber}</div>
         <div className={styles.info}>Points: {points}</div>
+        <Stopwatch />
       </div>
-      <Stopwatch />
+      <div className={styles.historyCnotainer}>
+        <div className={styles.historyTitle}>History</div>
+        <div className={styles.history}>
+          {board?.history.map((tiles, index) => (
+            <div key={index} className={styles.historyRow}>
+              {tiles.map((tile, tileIndex) => (
+                <span key={tileIndex} className={styles.historyTile}>{tile.value}</span>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
     </>
   )
 }
