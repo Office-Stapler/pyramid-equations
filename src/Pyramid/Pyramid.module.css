@@ -1,0 +1,31 @@
+.pyramidContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.pyramid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.pyramidRow {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.possibleMoves {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.guesses {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 5px;
+}

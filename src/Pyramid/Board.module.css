@@ -1,0 +1,13 @@
+.boardContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.tileRow {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
