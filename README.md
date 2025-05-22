@@ -1,3 +1,10 @@
+# Pyramid Equations
+This is a simple recreation of the "Pyramid Equations" game from "Devil's Plan".
+
+The game is simple, choose 3 tiles (in any order) that when merged together reach the target number.
+
+The first tile chosen will drop the operator (i.e. -9, x9, etc all become 9).
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
