@@ -1,0 +1,37 @@
+.alertContainer {
+  position: fixed;
+  bottom: 0;
+  margin: auto;
+  font-size: 15pt;
+}
+
+.alertContainer {
+  display: flex;
+  flex-direction: column;
+  border: 5px solid;
+  padding: 10px;
+}
+
+.hidden {
+  display: none;
+}
+
+.success {
+  background-color: #1c7c20;
+  border-color: #4caf50;
+}
+
+.error {
+  background-color: #c62828;
+  border-color: #f44336;
+}
+
+.info {
+  background-color: #2196f3;
+  border-color: #2196f3;
+}
+
+.warning {
+  background-color: #ff9800;
+  border-color: #ff9800;
+}

@@ -3,6 +3,7 @@ import type { TileEntity } from "../Tile/TileEntity";
 import type { BoardEntity } from "./BoardEntity";
 import { Tile } from "../Tile/Tile";
 import styles from "./Board.module.css"
+import { Alert } from "../Alert/Alert";
 
 type BoardProps = {
   board: BoardEntity;
@@ -11,6 +12,13 @@ type BoardProps = {
   decreasePoints: () => void;
   nextRound: () => void;
   possibleMoves: number;
+}
+
+
+type AlertMessage = {
+  title?: string;
+  message?: string;
+  variant?: "info" | "success" | "warning" | "error";
 }
 
 export const Board: React.FC<BoardProps> = ({
@@ -22,6 +30,7 @@ export const Board: React.FC<BoardProps> = ({
   possibleMoves,
 }) => {
   const [selectedTiles, setSelectedTiles] = useState<TileEntity[]>([]);
+  const [alertMessage, setAlertMessage] = useState<AlertMessage | undefined>(undefined);
 
   const handleTileClick = (tile: TileEntity) => {
     if (selectedTiles.length < 3) {
@@ -39,23 +48,33 @@ export const Board: React.FC<BoardProps> = ({
     if (selectedTiles.length === 3) {
       if (isValidMove()) {
         if (board.isInHistory(selectedTiles)) {
-          alert("You have already used this combination of tiles.");
+          setAlertMessage({
+            title: "Invalid Move",
+            message: "You have already used this combination of tiles.",
+            variant: "error"
+          });
           decreasePoints();
           setSelectedTiles([]);
           return;
         }
         board.addToHistory(selectedTiles);
         increasePoints();
-
         if (board.history.length === possibleMoves) {
-          alert("You have used all the possible moves.");
+          setAlertMessage({
+            title: "Congratulations!",
+            message: "You have completed a round.",
+            variant: "success"
+          });
           nextRound();
-          setSelectedTiles([]);
         }
       } else {
+        setAlertMessage({
+          title: "Invalid Move",
+          message: "The selected tiles do not equal the target number.",
+          variant: "error"
+        });
         decreasePoints();
       }
-
       setSelectedTiles([]);
     }
   }, [selectedTiles])
@@ -85,6 +104,12 @@ export const Board: React.FC<BoardProps> = ({
 
   return <div className={styles.boardContainer}>
     {renderTileBoard()}
+    <Alert
+      title={alertMessage?.title}
+      message={alertMessage?.message}
+      variant={alertMessage?.variant}
+      onClose={() => setAlertMessage(undefined)}
+    />
   </div>
 }
 
