@@ -20,13 +20,6 @@ type AlertMessage = {
   variant?: "info" | "success" | "warning" | "error";
 };
 
-// --- Helper Functions ---
-// This type guard is useful, but in this specific case,
-// `tile.current` will always be defined if `selectedTiles` only contains valid refs.
-// We'll adjust `handleTileClick` to ensure this.
-const isTileRefNotNull = (ref: RefObject<TileHandle | null>): ref is RefObject<TileHandle> =>
-  ref.current !== null;
-
 // --- Board Component ---
 export const Board: React.FC<BoardProps> = ({
   board,
