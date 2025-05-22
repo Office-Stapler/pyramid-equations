@@ -9,7 +9,7 @@ export class BoardEntity {
 
   private static HISTORY_TILE_SIZE = 3;
 
-  private static generateTiles = () => {
+  private generateTiles = () => {
     const tiles: Record<number, TileEntity[]> = {
       1: [],
       2: [],
@@ -39,12 +39,23 @@ export class BoardEntity {
     return tiles;
   }
 
-  private _tiles: Record<number, TileEntity[]> = BoardEntity.generateTiles();
+  private _tiles: Record<number, TileEntity[]>;
   private _targetNumber: number;
   private _history: TileEntity[][] = [];
+  private _numPossibleMoves: number = 0;
+  private _hasDecimalPossibility: boolean = true;
 
   constructor(targetNumber: number) {
     this._targetNumber = targetNumber;
+    this._tiles = this.generateTiles();
+    this._numPossibleMoves = this.calcNumPossibleMoves(targetNumber);
+    // Keep generating tiles until there are no decimal possibilities
+    // This is to ensure that the game is solvable
+    // and that the player can get the target number without getting a decimal number
+    while (this._hasDecimalPossibility) {
+      this._tiles = this.generateTiles();
+      this._numPossibleMoves = this.calcNumPossibleMoves(targetNumber);
+    }
   }
 
   get tiles(): Record<number, TileEntity[]> {
@@ -57,6 +68,10 @@ export class BoardEntity {
 
   get history(): TileEntity[][] {
     return this._history;
+  }
+
+  get numPossibleMoves(): number {
+    return this._numPossibleMoves;
   }
 
   addToHistory(tiles: TileEntity[]): void {
@@ -84,7 +99,25 @@ export class BoardEntity {
     })
   }
 
-  getNumPossibleMoves(targetNumber: number): number {
+
+  private checkHasDecimalCombination(tile1: TileEntity, tile2: TileEntity, tile3: TileEntity): boolean {
+    const operations = [
+      tile1.applyTile(tile2),
+      tile1.applyTile(tile3),
+      tile2.applyTile(tile3),
+      tile3.applyTile(tile2)
+    ];
+
+    for (const result of operations) {
+      if (!Number.isInteger(result.value)) {
+        this._hasDecimalPossibility = true;
+        return true;
+      }
+    }
+    return false;
+  }
+
+  private calcNumPossibleMoves(targetNumber: number): number {
     let possibleMoves = 0;
     const tiles: TileEntity[] = [];
     const board = this.tiles;
@@ -108,11 +141,19 @@ export class BoardEntity {
           const result1 = tile1.applyTile(tile2).applyTile(tile3);
           const result2 = tile1.applyTile(tile3).applyTile(tile2);
           if (result1.value === targetNumber || result2.value === targetNumber) {
+            // Only divide operations can result in a decimal number
+            if (tile2.tileOperation === "divide" || tile3.tileOperation === "divide") {
+              if (this.checkHasDecimalCombination(tile1, tile2, tile3)) {
+                return 0;
+              }
+            }
             possibleMoves++;
           }
         }
       }
     }
+    this._hasDecimalPossibility = false;
     return possibleMoves;
   }
+
 }

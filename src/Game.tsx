@@ -19,7 +19,7 @@ export const Game = () => {
       return;
     }
 
-    const possibleMoves = board.getNumPossibleMoves(targetNumber);
+    const possibleMoves = board.numPossibleMoves;
     if (possibleMoves < 2) {
       setBoard(new BoardEntity(targetNumber));
       return;

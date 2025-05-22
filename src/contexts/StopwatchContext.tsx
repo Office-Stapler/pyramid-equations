@@ -11,13 +11,12 @@ type StopWatchContextType = {
 
 export const StopWatchContext = createContext<StopWatchContextType | undefined>(undefined);
 
-export const StopWatchProvider = ({ children }: {children: React.ReactElement}) => {
+export const StopWatchProvider = ({ children }: { children: React.ReactElement }) => {
   const intervalId = useRef<number | undefined>(undefined);
   const [isActive, setIsActive] = useState(true);
   const [time, setTime] = useState(0);
 
   const resetInterval = () => {
-    console.trace('resetInterval');
     clearInterval(intervalId.current);
     intervalId.current = undefined;
   }
