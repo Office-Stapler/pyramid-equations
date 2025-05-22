@@ -1,8 +1,4 @@
-import { useEffect, useState } from 'react';
-import type { ReactElement } from 'react';
-import { Coordinate, TileEntity } from '../Tile/TileEntity';
 import styles from "./Pyramid.module.css"
-import { Tile } from '../Tile/Tile';
 import { Board } from './Board';
 import { BoardEntity } from './BoardEntity';
 
@@ -28,18 +24,18 @@ export const Pyramid: React.FC<PyramidProps> = ({
   nextRound,
   possibleMoves,
 }) => {
-  return  <div className={styles.pyramidContainer}>
-      <h1>Pyramid Equations</h1>
-      <div className={styles.guesses}>Correct Guesses: {board?.history.length ?? 0}</div>
-      <div className={styles.pyramid}>
-        <Board
-          board={board}
-          targetNumber={targetNumber}
-          increasePoints={increasePoints}
-          decreasePoints={decreasePoints}
-          nextRound={nextRound}
-          possibleMoves={possibleMoves}
-        />
-      </div>
+  return <div className={styles.pyramidContainer}>
+    <h1>Pyramid Equations</h1>
+    <div className={styles.guesses}>Correct Guesses: {board?.history.length ?? 0}</div>
+    <div className={styles.pyramid}>
+      <Board
+        board={board}
+        targetNumber={targetNumber}
+        increasePoints={increasePoints}
+        decreasePoints={decreasePoints}
+        nextRound={nextRound}
+        possibleMoves={possibleMoves}
+      />
+    </div>
   </div>
 }
