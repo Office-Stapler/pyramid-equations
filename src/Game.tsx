@@ -8,7 +8,6 @@ import { BoardEntity } from "./Pyramid/BoardEntity";
 import { getDefaultRandomInt } from "./utils/Utils";
 
 export const Game = () => {
-  const { setIsActive } = useStopWatchContext();
   // Generate a random number between 1 and 10
   const [targetNumber, setTargetNumber] = useState(getDefaultRandomInt());
   const [points, setPoints] = useState(0);
