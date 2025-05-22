@@ -7,7 +7,7 @@
     height: 75px;
     padding: 0 10px;
     font-size: 20pt;
-    clip-path: polygon(50% -50%,100% 50%,50% 150%,0 50%);
+    clip-path: polygon(50% -50%, 100% 50%, 50% 150%, 0 50%);
     aspect-ratio: 1/cos(50deg);
     background: #7bc3f3;
     transition: opacity 0.3s ease-in-out;
@@ -20,7 +20,4 @@
 
 .selected {
     background: #3B8686;
-}
-
-.tileOperation {
 }
