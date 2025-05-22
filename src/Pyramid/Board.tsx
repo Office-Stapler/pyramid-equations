@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useRef, useState, type RefObject } from "react";
-import type { TileEntity } from "../Tile/TileEntity";
 import type { BoardEntity } from "./BoardEntity";
 import { Tile, type TileHandle } from "../Tile/Tile";
 import styles from "./Board.module.css"
