@@ -4,8 +4,8 @@ The game is simple, choose 3 tiles (in any order) that when merged together reac
 The first tile chosen is the ONLY tile that matters for the order, since it will drop the operator (i.e. -9, x9, etc all become 9).
 
 e.g. Tiles (x3, -2, x3) will have two possible target numbers:
-- 3 (3 - 2 = 1 x 3 = 3)
-- 7 (3 x 3 = 9 - 2 = 7)
+- 3 (3 - 2 -> 1 x 3 = 3)
+- 7 (3 x 3 -> 9 - 2 = 7)
 
 # React + TypeScript + Vite
 
