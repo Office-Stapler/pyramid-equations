@@ -32,8 +32,6 @@ export const Board: React.FC<BoardProps> = ({
   const [selectedTiles, setSelectedTiles] = useState<RefObject<TileHandle>[]>([]);
   const [alertMessage, setAlertMessage] = useState<AlertMessage | undefined>(undefined);
 
-  // Memoize handleTileClick to prevent unnecessary re-renders of Tile components
-  // when it's passed down as a prop.
   const handleTileClick = useCallback((tileRef: RefObject<TileHandle>) => {
     // Ensure the ref has a current value and the tile isn't already selected.
     if (!tileRef.current || selectedTiles.some((selectedTile) => selectedTile === tileRef)) {
@@ -43,11 +41,9 @@ export const Board: React.FC<BoardProps> = ({
     if (selectedTiles.length < 3) {
       setSelectedTiles((prevSelectedTiles) => [...prevSelectedTiles, tileRef]);
     }
-  }, [selectedTiles]); // Dependency on selectedTiles to ensure latest state
+  }, [selectedTiles]);
 
-  // Effect to handle tile selection logic
   useEffect(() => {
-    // Only proceed when 3 tiles are selected
     if (selectedTiles.length !== 3) {
       return;
     }
@@ -96,7 +92,6 @@ export const Board: React.FC<BoardProps> = ({
             message: "All possible moves were found",
             variant: "success",
           });
-          // This timeout gives the user a chance to see the "valid" animation
           setTimeout(() => nextRound(), 1000);
         }
       }
@@ -110,12 +105,9 @@ export const Board: React.FC<BoardProps> = ({
       decreasePoints();
     }
 
-    // Always reset selected tiles after processing a move
     setSelectedTiles([]);
   }, [selectedTiles, board, targetNumber, increasePoints, decreasePoints, nextRound, possibleMoves]);
 
-  // Memoize tile rendering to prevent re-rendering the entire board
-  // unless `board` or `selectedTiles` change.
   const renderTileBoard = useCallback(() => {
     const rows = Object.keys(board.tiles);
     return rows.map((row, index) => {
@@ -148,17 +140,21 @@ export const Board: React.FC<BoardProps> = ({
         </div>
       );
     });
-  }, [board, selectedTiles, handleTileClick]); // Add handleTileClick to dependencies
+  }, [board, selectedTiles, handleTileClick]);
 
   return (
     <div className={styles.boardContainer}>
       {renderTileBoard()}
-      <Alert
-        title={alertMessage?.title}
-        message={alertMessage?.message}
-        variant={alertMessage?.variant}
-        onClose={() => setAlertMessage(undefined)}
-      />
+      {
+        alertMessage && (
+          <Alert
+            title={alertMessage?.title}
+            message={alertMessage?.message}
+            variant={alertMessage?.variant}
+            onClose={() => setAlertMessage(undefined)}
+          />
+        )
+      }
     </div>
   );
 };
