@@ -9,6 +9,8 @@ type AlertProps = {
   message?: string;
   onClose?: () => void;
   variant?: AlertType;
+  // How long before automatically disappearing and calling `onClose`
+  timeout?: number;
 }
 
 const alertStyles: Record<AlertType, string> = {
@@ -18,43 +20,31 @@ const alertStyles: Record<AlertType, string> = {
   error: styles.error,
 }
 
-export const Alert: React.FC<AlertProps> = ({ onClose, variant, title, message }) => {
-  const [isVisible, setIsVisible] = useState(false);
-  const handleClose = () => {
-    setIsVisible(false);
-    onClose?.();
-  }
+export const Alert: React.FC<AlertProps> = ({ onClose, variant, title, message, timeout = 3000 }) => {
 
-  const onChange = () => {
-    // Automatically close the alert after 3 seconds
-    const timer = setTimeout(() => {
-      handleClose();
-    }, 3000);
-    return () => clearTimeout(timer);
-  }
+  const [visible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    if (!title && !message) {
-      return;
+    // Automatically close the alert after 3 seconds
+    if (timeout !== undefined) {
+      const timer = setTimeout(() => {
+        setIsVisible(false);
+        onClose?.();
+      }, timeout);
+      return () => clearTimeout(timer);
     }
-    setIsVisible(true);
-    return onChange();
-  }, [onClose, variant, title, message]);
-
-  if (!isVisible) {
-    return null;
-  }
+  }, [onClose, timeout]);
 
   return (
     <div className={
       classNames(
         styles.alertContainer,
-        alertStyles[variant ?? "info"],
-        { [styles.hidden]: !isVisible }
+        alertStyles[variant ?? "error"],
+        { [styles.hidden]: !visible }
       )}>
       <div className={styles.alertContent}>
-        {title && <div className={styles.alertTitle}>{title}</div>}
-        {message && <div className={styles.alertMessage}>{message}</div>}
+        {<div className={styles.alertTitle}>{title}</div>}
+        {<div className={styles.alertMessage}>{message}</div>}
       </div>
     </div>
   )

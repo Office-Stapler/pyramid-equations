@@ -1,37 +1,78 @@
+@keyframes slideUp {
+
+  0%,
+  5% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+
+  10%,
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+
+  0%,
+  5% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  10%,
+  100% {
+    transform: translateY(100%);
+    display: none;
+  }
+}
+
+
 .alertContainer {
   position: fixed;
   bottom: 0;
-  margin: auto;
-  font-size: 15pt;
+  margin: 10px auto;
+  font-size: 13pt;
+  min-width: 50%;
+  padding: 10px;
+  animation-name: slideUp;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
 }
 
-.alertContainer {
+.alertMessage {
+  font-size: 10pt;
+}
+
+.alertTitle {
+  font-weight: bold;
+}
+
+.alertContent {
   display: flex;
   flex-direction: column;
-  border: 5px solid;
-  padding: 10px;
+  gap: 2px;
 }
 
 .hidden {
-  display: none;
+  animation-name: slideOut;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
 }
 
 .success {
-  background-color: #1c7c20;
-  border-color: #4caf50;
+  background-color: #1b7825;
 }
 
 .error {
-  background-color: #c62828;
-  border-color: #f44336;
+  background-color: #d32f2f;
 }
 
 .info {
-  background-color: #2196f3;
-  border-color: #2196f3;
+  background-color: #2f6bd3;
 }
 
 .warning {
-  background-color: #ff9800;
-  border-color: #ff9800;
+  background-color: #d38f2f;
 }
