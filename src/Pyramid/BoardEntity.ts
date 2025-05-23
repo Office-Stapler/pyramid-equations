@@ -53,6 +53,7 @@ export class BoardEntity {
     // This is to ensure that the game is solvable
     // and that the player can get the target number without getting a decimal number
     while (this._hasDecimalPossibility) {
+      console.log("Generatin new board...")
       this._tiles = this.generateTiles();
       this._numPossibleMoves = this.calcNumPossibleMoves(targetNumber);
     }
@@ -87,10 +88,10 @@ export class BoardEntity {
         return false;
       }
 
-      const secondTile = tiles[0];
-      const thirdTile = tiles[1];
-      const secondTileHistory = historyTiles[0];
-      const thirdTileHistory = historyTiles[1];
+      const secondTile = tiles[1];
+      const thirdTile = tiles[2];
+      const secondTileHistory = historyTiles[1];
+      const thirdTileHistory = historyTiles[2];
 
       const possibility1 = secondTile.equals(secondTileHistory) && thirdTile.equals(thirdTileHistory);
       const possibility2 = secondTile.equals(thirdTileHistory) && thirdTile.equals(secondTileHistory);
@@ -147,6 +148,7 @@ export class BoardEntity {
                 return 0;
               }
             }
+            console.log("Possible move found ", `[${tile1}, ${tile2}, ${tile3}]`)
             possibleMoves++;
           }
         }
