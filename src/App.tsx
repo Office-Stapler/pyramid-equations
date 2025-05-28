@@ -1,12 +1,18 @@
 import './App.css'
 import { StopWatchProvider } from './contexts/StopwatchContext';
 import { Game } from './Game';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Modal } from './Modal/Modal';
 
 function App() {
+  // Get the initial state from localStorage or default to true
+  const initialShowTutorial = localStorage.getItem('showTutorial') === 'false' ? false : true;
 
-  const [showTutorial, setShowTutorial] = useState(true);
+  const [showTutorial, setShowTutorial] = useState(initialShowTutorial);
+
+  useEffect(() => {
+    localStorage.setItem('showTutorial', showTutorial.toString());
+  }, [showTutorial])
 
   return (
     <StopWatchProvider>
