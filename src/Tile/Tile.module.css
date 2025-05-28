@@ -20,19 +20,25 @@
 
 .invalidMoveFound {
   background-color: #400d0a;
-  transform: scale(0.8);
-  transition: transform 0.5s ease-in-out;
+  transition: transform all 0.2s ease-in-out;
 }
 
 .validMoveFound {
   background-color: #0a402f;
-  transform: scale(1.2);
-  transition: transform 0.5s ease-in-out;
+  transition: transform all 0.2s ease-in-out;
 }
 
 @media (hover :hover) {
   .tile:hover {
     background: #3b866e;
     cursor: pointer;
+  }
+
+  .validMoveFound:hover {
+    background: #0a402f;
+  }
+
+  .invalidMoveFound:hover {
+    background-color: #400d0a;
   }
 }
